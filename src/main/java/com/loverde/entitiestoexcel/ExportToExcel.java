@@ -117,11 +117,11 @@ public class ExportToExcel {
         if (entityList.size() < 1) return;
 
         Workbook workbook = new XSSFWorkbook();
-        if (entityList.get(0).getClass() == List.class) {
+        if (List.class.isAssignableFrom(entityList.get(0).getClass()) ) {
 
-            while(entityList.iterator().hasNext())
+            for(int x=0;x<=entityList.size()-1;x++)
             {
-                List innerList = (List) entityList.iterator().next();
+                List innerList = (List) entityList.get(x);
                 saveEntityListToWorkBook(workbook,innerList);
             }
         }

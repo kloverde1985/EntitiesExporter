@@ -2,7 +2,8 @@
 
 This project was designed to allow me to quickly dump a list of Hibernate entities to an Excel document. I have only had one use case so far. That use case was dumping some prototype data to an excel sheet. This has allowed for easy debugging a ETL process by dumping to excel instead of into a table. Excel has been easier to organize the data, and test for patterns. I didn't like importing the CSV every time. I used reflections to obtain column names, and data types. 
 
-This will export to multiple sheets if you use a List of Lists, of entities. E.G List<List<EntityClass>> myEntities;
+This will export to multiple sheets if you use a List of Lists, of entities.
+      ` E.G List<List<EntityClass>> myEntities;`
 
 The entities are limited to only annotated classes. If I continue development, I would like to work with XML definitions as well. 
 
@@ -31,34 +32,38 @@ From local maven
 Source in project:
 
   Add the Apache POI dependency to your pom.xml
-          <dependency>
+  
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.13</version>
         </dependency>
-  You should already have the Hibernate depencies in your project. 
+        
+  You should already have the Hibernate depencies in your project. This project does not configure connections, or DAO's etc.
   
 
 USE
 
 Defining entities
-
-//Define columns in the entity file. Use the @Column annotation, only the name attributer is required. 
-@Column(name = "prod", nullable = false, insertable = true, updatable = true, length = 6)
+```
+  //Define columns in the entity file. Use the @Column annotation, only the name attributer is required. 
+    @Column(name = "prod", nullable = false, insertable = true, updatable = true, length = 6)
     public String getProd() {
-        return prod;
+    return prod;
     }
-    Output for just one worksheet
+ ```   
     
+Output for just one worksheet
+```    
 //In your business logic.  Obtain a list of Hibernate entities
 List<Product> products = productsDAO.list();
 //Create ExportToExcel object. List followed by the full path to the output file.
 ExportToExcel exportToExcel = new ExportToExcel(products,"products.xlsx");
 //Call the export function
 exportToExcel.export();
-
+```
 Output for multiple entities to worksheets.
-
+```
 //In your business logic.  Obtain a list of Hibernate entities
 List<Product> products = productDAO.list();
 List<Price> prices = priceDAO.list();
@@ -71,4 +76,4 @@ productPrices.add(prices);
 ExportToExcel exportToExcel = new ExportToExcel(productPrices,"products.xlsx");
 //Call the export function
 exportToExcel.export();
-
+```

@@ -12,40 +12,42 @@ I used Apache POI since I generally like the apache API's. It doesn't have a who
 I'm using the latest Hibernate (4.3.11.Final as of writing this), but there is no reason it can't work with prior versions. The only hibernate item it needs is the Column annotation class. 
 
 
-INSTALLATION:
+**INSTALLATION:**
 
 
 From local maven
   From the cloned directory, run maven to install the jar file into your local maven.
-    mvn install
-    
-  Add the dependency to your pom.xml (don't forget to check on the version #)
   
-            <dependency>
+   ` mvn install`
+    
+  Add the dependency to your pom.xml **(don't forget to check on the version #)**
+```XML
+      <dependency>
             <groupId>com.loverde</groupId>
             <artifactId>EntitiesToExcel</artifactId>
             <version>0.12</version>
         </dependency>
+```
 
 
 
 Source in project:
 
   Add the Apache POI dependency to your pom.xml
-  
+```xml
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.13</version>
         </dependency>
-        
+```     
   You should already have the Hibernate depencies in your project. This project does not configure connections, or DAO's etc.
   
 
-USE
+**USE**
 
-Defining entities
-```
+**Defining entities**
+```Java
   //Define columns in the entity file. Use the @Column annotation, only the name attributer is required. 
     @Column(name = "prod", nullable = false, insertable = true, updatable = true, length = 6)
     public String getProd() {
@@ -53,17 +55,17 @@ Defining entities
     }
  ```   
     
-Output for just one worksheet
-```    
+**Output for just one worksheet**
+```Java    
 //In your business logic.  Obtain a list of Hibernate entities
 List<Product> products = productsDAO.list();
-//Create ExportToExcel object. List followed by the full path to the output file.
+//Create ExportToExcel object. Parameters are: List followed by the full path to the output file.
 ExportToExcel exportToExcel = new ExportToExcel(products,"products.xlsx");
 //Call the export function
 exportToExcel.export();
 ```
-Output for multiple entities to worksheets.
-```
+**Output for multiple entities to worksheets.**
+```Java
 //In your business logic.  Obtain a list of Hibernate entities
 List<Product> products = productDAO.list();
 List<Price> prices = priceDAO.list();
@@ -71,8 +73,8 @@ List<Price> prices = priceDAO.list();
 List<List> productPrices = new ArrayList<>();
 productPrices.add(products);
 productPrices.add(prices);
-//Create ExportToExcel object
-//Create ExportToExcel object. List followed by the full path to the output file.
+
+//Create ExportToExcel object. Parameters are: List followed by the full path to the output file.
 ExportToExcel exportToExcel = new ExportToExcel(productPrices,"products.xlsx");
 //Call the export function
 exportToExcel.export();

@@ -131,9 +131,11 @@ public class ExportToExcel {
         }
 
 
-        FileOutputStream fos = new FileOutputStream(fileName);
-        workbook.write(fos);
-        fos.close();
+        try(FileOutputStream fos = new FileOutputStream(fileName);)
+        {
+            workbook.write(fos);
+            fos.close();
+        }
     }
 
 }

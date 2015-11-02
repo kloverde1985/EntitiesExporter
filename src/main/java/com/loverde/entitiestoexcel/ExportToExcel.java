@@ -112,7 +112,7 @@ public class ExportToExcel {
         return workbook;
     }
 
-    public void saveWorkbook() throws IOException, InvocationTargetException, IllegalAccessException {
+    public void export() throws IOException, InvocationTargetException, IllegalAccessException {
         if (entityList == null) return;
         if (entityList.size() < 1) return;
 

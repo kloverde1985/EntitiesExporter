@@ -15,9 +15,13 @@ I'm using the latest Hibernate (4.3.11.Final as of writing this), but there is n
 **INSTALLATION:**
 
 
-From local maven
-  From the cloned directory, run maven to install the jar file into your local maven.
-  
+Install into local maven.
+Clone the repo
+
+` git clone https://github.com/kloverde1985/EntitiesToExcel.git`
+
+Run maven to install into
+
    ` mvn install`
     
   Add the dependency to your pom.xml **(don't forget to check on the version #)**
@@ -49,7 +53,7 @@ Source in project:
 **Defining entities**
 ```Java
   //Define columns in the entity file. Use the @Column annotation, only the name attributer is required. 
-    @Column(name = "prod", nullable = false, insertable = true, updatable = true, length = 6)
+    @Column(name = "prod")
     public String getProd() {
     return prod;
     }

@@ -92,12 +92,21 @@ public class ExportToExcel {
                     if (value != null) {
 
                         Cell cell = row.createCell(cellIndex);
-                        cell.setCellValue(value.toString());
                         if (method.getReturnType() == short.class || method.getReturnType() == Integer.class || method.getReturnType() == BigDecimal.class) {
+                            cell.setCellValue(Double.valueOf(value.toString()));
                             cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+                        }else
+                        {
+                            cell.setCellValue(value.toString());
                         }
-                        cellIndex++;
+                    }else
+                    {
+
+                        Cell cell = row.createCell(cellIndex);
+                        cell.setCellValue("");
+
                     }
+                    cellIndex++;
                 } catch (IllegalAccessException e) {
                     throw e;
                 } catch (InvocationTargetException e) {

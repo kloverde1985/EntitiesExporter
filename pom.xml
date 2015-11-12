@@ -53,11 +53,4 @@
             <version>3.13</version>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <repository>
-            <id>com.holstein</id>
-            <name>Holstein Internal Repository</name>
-            <url>scp://hopdevil:/develop/DocumentRoot/maven/</url>
-        </repository>
-    </distributionManagement>
 </project>
